@@ -1,0 +1,15 @@
+var express = require('express');
+var passport = require('passport');
+var Strategy = require('passport-http-bearer').Strategy;
+var router = express.Router();
+var controller = require('./issue.controller.js');
+router.get('/issue', controller.getAllIssue);
+router.post('/issue', controller.addIssue);
+router.post('/addTask', controller.addTask);
+router.delete('/issue/:id' , controller.deleteIssue);
+router.post('/mutiIssue', controller.deleteMutipleIssue);
+router.post('/editIssue' , controller.editIssue);
+router.post('/backlog', controller.addBacklog);
+router.get('/backlog/:id', controller.getBacklog);
+router.post('/issueByIssueId', controller.findIssueByIssueId);
+module.exports = router;

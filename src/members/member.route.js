@@ -1,0 +1,22 @@
+(function () {
+  'use strict';
+  var express = require('express');
+  var router = express.Router();
+  var passport = require('passport');
+  var controller = require('./member.controller.js');
+  router.get('/members', controller.getMember);
+  router.post('/members', controller.postMember);
+  router.get('/memberByToken' , controller.getMemberByToken);
+  router.put('/members', passport.authenticate('bearer', { session: false }) ,controller.editMember);
+  router.put('/password' ,passport.authenticate('bearer', { session: false }) , controller.editPassword);
+  router.post('/active' , controller.activeStatus);
+  router.post('/forgotPassword' , controller.forgotPassword);
+  router.post('/changePasswordbyUsername' ,controller.changePasswordbyUsername);
+  router.post('/checkTokenAndReturnUsername' , controller.checkTokenAndReturnUsername);
+  router.post('/findIdByName' , controller.findIdByName);
+  router.get('/inActive' , controller.inActiveMember);
+  router.delete('/member/:id' , controller.removeMember);
+  router.get('/me', passport.authenticate('bearer', { session: false }) , controller.checkMe);
+  // router.get('/:name' , controller.yourUsername);
+  module.exports = router;
+})();
